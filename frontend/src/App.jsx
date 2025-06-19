@@ -7,14 +7,16 @@ import Contact from "./pages/Contact"; // สมมุติมีหน้า C
 
 function App() {
   return (
-    <Router>
-      <Navbar /> {/* แสดง Navbar ทุกหน้า */}
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/contact" element={<Contact />} /> {/* เพิ่มหน้าใหม่ */}
-      </Routes>
-    </Router>
+    <div className="flex">
+      <Router>
+        <Navbar /> {/* แสดง Navbar ทุกหน้า */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} /> {/* เพิ่มหน้าใหม่ */}
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
