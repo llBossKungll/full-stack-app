@@ -7,7 +7,7 @@ import Contact from "./pages/Contact"; // สมมุติมีหน้า C
 
 function App() {
   return (
-    <div className="flex" style={{background: "linear-gradient(154deg, rgba(214, 214, 214, 0.82) 0%, rgba(146, 255, 139, 0.74) 100%)"}}>
+    <div className="flex" style={{background: "linear-gradient(154deg, rgba(214, 214, 214, 0.82) 0%, rgba(188, 252, 184, 0.86) 100%)"}}>
       <Router>
         <Navbar /> {/* แสดง Navbar ทุกหน้า */}
         <Routes>
