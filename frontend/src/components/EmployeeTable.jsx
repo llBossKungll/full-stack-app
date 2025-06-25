@@ -12,11 +12,46 @@ const EmployeeTable = ({ data }) => {
     { name: 'Email', selector: row => row.email, sortable: true },
     { name: 'Department', selector: row => row.department, sortable: true },
     { name: 'Telephone', selector: row => row.tel, sortable: true },
+    {
+    name: 'Actions',
+    cell: row => (
+      <div className="flex gap-2">
+        <button
+          onClick={() => handleEdit(row)}
+          className="px-2 py-1 bg-yellow-400 hover:bg-yellow-500 text-white rounded text-sm"
+        >
+          แก้ไข
+        </button>
+        <button
+          onClick={() => handleDelete(row.id)}
+          className="px-2 py-1 bg-red-500 hover:bg-red-600 text-white rounded text-sm"
+        >
+          ลบ
+        </button>
+      </div>
+    ),
+    ignoreRowClick: true,
+    allowOverflow: true,
+    button: true,
+  },
   ];
+
+  const handleEdit = (row) => {
+  // TODO: เปิด Modal หรือ นำข้อมูลไปแก้ไข
+  console.log("📝 Edit:", row);
+};
+
+const handleDelete = (id) => {
+  if (confirm("❗ คุณแน่ใจหรือไม่ว่าต้องการลบรายการนี้?")) {
+    // TODO: ส่ง request ไปลบจาก backend
+    console.log("🗑️ Delete ID:", id);
+  }
+};
+
 
   // ฟิลเตอร์ข้อมูล
   const filteredData = data.filter(item =>
-    `${item.first_name} ${item.last_name} ${item.email} ${item.department}`
+    `${item.first_name} ${item.last_name} ${item.email} ${item.department} ${item.tel} ${item.nick_name}`
       .toLowerCase()
       .includes(filterText.toLowerCase())
   );
