@@ -1,31 +1,26 @@
+// backend/server.js
+require('dotenv').config();
 const express = require('express');
-const { Pool } = require('pg');
-const cors = require('cors'); // ถ้าใช้กับ frontend
+const cors = require('cors');
+const { createClient } = require('@supabase/supabase-js');
 
 const app = express();
 const port = 3000;
 
-app.use(cors()); // ถ้ามี frontend แยก domain
+app.use(cors());
 app.use(express.json());
 
-// 👇 เชื่อมต่อ Supabase PostgreSQL
-const pool = new Pool({
-  connectionString: 'postgresql://postgres.skcwrgpratcwvhklqupn:partytpsby17@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?sslmode=require',
-  ssl: { rejectUnauthorized: false }
-});
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_KEY
+);
 
-// 👇 สร้าง API endpoint
 app.get('/employees', async (req, res) => {
-  try {
-    const { rows } = await pool.query('SELECT * FROM employees');
-    res.json(rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error fetching data');
-  }
+  const { data, error } = await supabase.from('employees').select('*');
+  if (error) return res.status(500).json(error);
+  res.json(data);
 });
 
-// 👇 เริ่มรัน server
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`✅ Backend ready at http://localhost:${port}`);
 });

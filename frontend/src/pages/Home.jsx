@@ -1,30 +1,18 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faGear } from '@fortawesome/free-solid-svg-icons';
+import { useEffect, useState } from 'react';
+import EmployeeTable from '../components/EmployeeTable';
 
 export default function Home() {
+  const [employees, setEmployees] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/employees') // หรือ API ที่คุณใช้
+      .then(res => res.json())
+      .then(data => setEmployees(data));
+  }, []);
+
   return (
-    <div className="flex justify-between items-center p-4 h-25 w-full">
-      <div className="border-2 border-white ml-4 h-12 w-30 rounded-4xl items-center flex justify-center bg-gray-100">
-        <h1 className="text-2xl ">Home</h1>
-      </div>
-
-      <div className="flex gap-4 items-center">
-
-        <div className="items-center flex gap-2 p-3 rounded-full bg-white">
-          <FontAwesomeIcon icon={faGear} />
-          <span className=''>setting</span>
-        </div>
-
-
-          <FontAwesomeIcon icon={faBell} className="bg-white p-4 items-center flex gap-2 rounded-full"/>
-
-
-        <div className="bg-white p-2 items-center flex gap-2 rounded-full">
-          <img src="" alt="" className="w-8 h-8 rounded-full" />
-        </div>
-
-      </div>
+    <div className="p-4 rounded-lg bg-gray-100 shadow-md">
+      <EmployeeTable data={employees} />
     </div>
-
   );
 }

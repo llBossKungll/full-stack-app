@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHouse, faCat, faDog, faEject } from '@fortawesome/free-solid-svg-icons';
+import { faHouse,  faEject } from '@fortawesome/free-solid-svg-icons';
 
 
 
